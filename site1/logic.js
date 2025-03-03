@@ -5,7 +5,30 @@ const modeDark=document.querySelector("#mode-dark");
 document.addEventListener("DOMContentLoaded",()=>{
     const modeLight=document.querySelector("#mode-light");
     const modeDark=document.querySelector("#mode-dark");
+    fetch("https://dummyjson.com/products")
+    .then(response=>response.json())
+    .then(data => {
+        displayProducts(data.products);
+    })
 });
+
+function displayProducts(products){
+    const productGrid=document.querySelector(".product-grid");
+    productGrid.innterHTML="";
+    products.forEach(product=>{
+        const productCard=document.createElement("div");
+        productCard.classList.add("card");
+        
+        productCard.innerHTML = `
+        <img src="${product.thumbnail}" alt="${product.title}">
+        <h3>${product.title}</h3>
+        <p>$${product.price}</p>
+        <button>Add to Cart</button>
+      `;
+
+      productGrid.appendChild(productCard);
+    })
+}
 
 const body=document.body;
 if(localStorage.getItem("currentTheme")==="dark")
