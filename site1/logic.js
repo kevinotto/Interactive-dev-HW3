@@ -136,5 +136,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
+
+      // selecting the drop down button for price
+
+  const priceSort = document.querySelector("#price-sort");
+
+  priceSort.addEventListener("change", () => {
+      const sortBy = priceSort.value;
+      
+      if (sortBy === "price-low") {
+          allProducts.sort((a, b) => a.price - b.price); 
+      } else if (sortBy === "price-high") {
+          allProducts.sort((a, b) => b.price - a.price);
+      }
+      
+      displayProducts(currentPage);
   });
-  
+
+  });
